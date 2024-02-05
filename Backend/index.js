@@ -1,10 +1,12 @@
 import express, { json } from "express"
 import db from "../Backend/connection.js"
+import cors from 'cors'
 
 
 const port=8080;
 const app=express();
 app.use(express.json())
+app.use(cors())
 app.get("/",(req,res)=>{
 
     res.send("Hello from backend")
@@ -27,12 +29,13 @@ try {
 
 app.post("/addbook",(req,res)=>{
    
-    const q="INSERT INTO books (`title`,`descr`,`cover_pic`,`Author`) VALUES (?)"
+    const q="INSERT INTO books (`title`,`descr`,`cover_pic`,`Author`,`price`) VALUES (?)"
     const values=[
         req.body.title,
         req.body.descr,
         req.body.cover_pic,
         req.body.Author,
+        req.body.price
 
     ]
     db.query(q,[values],(err,data)=>{

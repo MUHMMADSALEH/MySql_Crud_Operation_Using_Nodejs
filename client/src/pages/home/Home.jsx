@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styles from './home.module.css'
 
 const Home = () => {
   const [book, setBook] = useState([]);
@@ -43,21 +44,25 @@ navigate("/updatebook")
 
 }
 
-  return <div>
+  return <div  >
+
 <h1>Saleh Book Store</h1>
-<div className="books">
-    {
+<div className={styles.books}>
+{
         book.map(book=>(
-            <div className="book" key={book.id}>
+            <div className={styles.book} key={book.id}>
              {book.cover_pic &&  <img src={book.cover_pic} alt=" book cover picture " />}
-             {book.title}
-             {book.descr}
-             {book.Author}
-             {book.price}
+             <h1>{book.title}</h1>
+             <p>{book.descr}</p>
+             <h2>{book.Author}</h2>
+             
             </div>
         ))
     }
+
 </div>
+    
+
 <button className="delete"   onClick={()=>handleDelete(book.id)}>Delete</button>
 <button className="update"  onClick={handleUpdate}>Update</button>
 
